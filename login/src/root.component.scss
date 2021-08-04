@@ -1,0 +1,55 @@
+
+body {
+  font-family: "Open Sans", sans-serif;
+
+  .row {
+    height: 100vh;
+    
+    .right {
+      background: url('https://corretor-main-dev.pottencial.com.br/3ca2ca36d04825e7f91bc90ab3d005b9.png');
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      img {
+        margin: 15px;
+      }
+    }
+
+    .title {
+      color: #F26522 !important;
+      font-family: Poppins,sans-serif;
+      font-weight: 600;
+      line-height: 1.6;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 2.125rem;
+      margin-top: 64px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      line-height: 1.235;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    p {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  .form {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    display: flex;
+  }
+
+  .ant-btn-primary {
+    background: #F26522 !important;
+    border-color: #F26522 !important;
+  }
+
+}

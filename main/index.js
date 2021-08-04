@@ -23,7 +23,7 @@ export function mount(props) {
        * above and the transition doens't actually happen.
        **/
       window.requestAnimationFrame(() => domEl.classList.add('application-mounting'))
-      domEl.innerHTML = `A Nova interface do Corretor foi carregada :D`
+      domEl.innerHTML = `Main - Nova interface`
       domEl.style.fontSize = "5rem";
       domEl.style.backgroundColor = 'yellow'
     })

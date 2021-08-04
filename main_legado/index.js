@@ -12,7 +12,6 @@ export function bootstrap(props) {
 }
 
 export function mount(props) {
-  localStorage.removeItem("brokerId");
   return Promise.resolve().then(() => {
     /**
      * window.requestAnimationFrame() is necessary in order to have the transition on first bootstrap/mount,
@@ -22,21 +21,9 @@ export function mount(props) {
     window.requestAnimationFrame(() =>
       domEl.classList.add("application-mounting")
     );
-    domEl.innerHTML = `Login Pottencial`;
+    domEl.innerHTML = `Main LEGADO`;
     domEl.style.fontSize = "5rem";
-    domEl.style.backgroundColor = "red";
-
-    const event = new CustomEvent("login", {
-      detail: {
-        brokerId: "m4st3r1d",
-      },
-    });
-    const button = document.createElement("button");
-    button.innerHTML = "Enviar evento de login";
-    button.onclick = () => {
-      window.dispatchEvent(event);
-    };
-    domEl.appendChild(button);
+    domEl.style.backgroundColor = "lightblue";
   });
 }
 
