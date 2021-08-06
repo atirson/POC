@@ -1,56 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Pottencial</title>
-  <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
-  <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';">
-  <meta name="importmap-type" content="systemjs-importmap" />
-  <script type="systemjs-importmap">
-    {
-      "imports": {
-        "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
-        "react": "https://unpkg.com/react@17/umd/react.production.min.js",
-        "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
-      }
-    }
-  </script>
-  <link rel="preload" href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js" as="script">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <% if (isLocal) { %>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Pottencial</title>
+    <script src="https://cdn.jsdelivr.net/npm/regenerator-runtime@0.13.7/runtime.min.js"></script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"
+    />
+    <meta name="importmap-type" content="systemjs-importmap" />
     <script type="systemjs-importmap">
-    {
-      "imports": {
-        "@Pottencial/root-config": "//localhost:9000/Pottencial-root-config.js",
-        "@Pottencial/Login": "//localhost:8080/Pottencial-Login.js"
+      {
+        "imports": {
+          "single-spa": "https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js",
+          "react": "https://unpkg.com/react@17/umd/react.production.min.js",
+          "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+        }
       }
-    }
-  </script>
+    </script>
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/single-spa@5.9.0/lib/system/single-spa.min.js"
+      as="script"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <% if (isLocal) { %>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "@Pottencial/root-config": "//localhost:9000/Pottencial-root-config.js",
+          "@Pottencial/Login": "//localhost:8080/Pottencial-Login.js"
+        }
+      }
+    </script>
     <% } %>
 
-      <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
-      <% if (isLocal) { %>
-        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
-        <% } else { %>
-          <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
-          <% } %>
-</head>
+    <script src="https://cdn.jsdelivr.net/npm/import-map-overrides@2.2.0/dist/import-map-overrides.js"></script>
+    <% if (isLocal) { %>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.js"></script>
+    <% } else { %>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
+    <% } %>
 
-<body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-  <main></main>
+    <div id="layout" style="height: 10rem; background-color: lightblue">
+    </div>
+  </head>
+
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-204229064-1"
+  ></script>
   <script>
-    System.import('@Pottencial/root-config');
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){​​​dataLayer.push(arguments);}​​​
+    gtag('js', newDate());
+    gtag('config', 'UA-204229064-1');
   </script>
-  <import-map-overrides-full show-when-local-storage="devtools" dev-libs></import-map-overrides-full>
-</body>
+  <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MWWK5TV"></script>
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-204229064-1"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    gtag = function () {​​​ dataLayer.push(arguments); }​​​
+    gtag('js', newDate());
+    gtag('config', 'UA-204229064-1', {​​​ 'optimize_id':'TPunGV65RDK9YP29npw4ow'}​​​);
+  </script>
 
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <main></main>
+    <script>
+      System.import('@Pottencial/root-config');
+    </script>
+    <import-map-overrides-full
+      show-when-local-storage="devtools"
+      dev-libs
+    ></import-map-overrides-full>
+  </body>
 </html>

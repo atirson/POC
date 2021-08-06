@@ -5,10 +5,11 @@ import './root.component.scss';
 
 export default function Root(props) {
   const onFinish = async (values: any) => {
-
-    const res = await axios.get(`https://610ab78e52d56400176aff4c.mockapi.io/login/${values.email}`)
+    const res = await axios.get(
+      `https://610ab78e52d56400176aff4c.mockapi.io/login/${values.email}`
+    );
     if (res.status === 200) {
-      const event = new CustomEvent("login", { detail: { ...res.data } });
+      const event = new CustomEvent('refresh', { detail: { ...res.data } });
       window.dispatchEvent(event);
       console.log('Success:', values);
     }
@@ -20,8 +21,12 @@ export default function Root(props) {
 
   return (
     <Row className="row">
-      <Col span={12} className='right'>
-        <img src="https://corretor-main-dev.pottencial.com.br/093105277d0d798a1dea97367e47280b.jpg" alt="logo" aria-label="Pottencial" />
+      <Col span={12} className="right">
+        <img
+          src="https://corretor-main-dev.pottencial.com.br/093105277d0d798a1dea97367e47280b.jpg"
+          alt="logo"
+          aria-label="Pottencial"
+        />
       </Col>
       <Col span={12}>
         <Form
@@ -32,10 +37,13 @@ export default function Root(props) {
           onFinishFailed={onFinishFailed}
           className="form"
         >
-
           <Form.Item wrapperCol={{ offset: 3, span: 18 }}>
-            <Typography.Title className="title">PORTAL DO CORRETOR</Typography.Title>
-            <Typography.Title className="subtitle">Seja Bem-vindo(a)!</Typography.Title>
+            <Typography.Title className="title">
+              PORTAL DO CORRETOR (TESTE INJECTION)
+            </Typography.Title>
+            <Typography.Title className="subtitle">
+              Seja Bem-vindo(a)!
+            </Typography.Title>
             <p>É novo na Pottencial? Cadastre-se</p>
           </Form.Item>
 
@@ -52,7 +60,6 @@ export default function Root(props) {
             </Button>
           </Form.Item>
         </Form>
-
       </Col>
     </Row>
   );

@@ -23,6 +23,7 @@
     "@babel/runtime": "^7.14.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
+    "@types/jest": "^26.0.24",
     "@types/testing-library__jest-dom": "^5.14.0",
     "babel-jest": "^27.0.5",
     "concurrently": "^6.2.0",
@@ -48,7 +49,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "@types/jest": "^26.0.23",
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.8",
     "@types/systemjs": "^6.1.0",

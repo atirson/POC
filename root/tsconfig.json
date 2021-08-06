@@ -1,5 +1,10 @@
 {
   "extends": "ts-config-single-spa",
   "include": ["src/**/*", "node_modules/@types"],
-  "exclude": ["src/**/*.test*"]
+  "exclude": ["src/**/*.test*"],
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  },
+  "target": "ES6",
+  "lib": ["DOM", "ES6", "DOM.Iterable", "ScriptHost", "ES2016.Array.Include"]
 }
