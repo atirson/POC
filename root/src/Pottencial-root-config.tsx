@@ -1,35 +1,52 @@
-import { registerApplication, start } from 'single-spa';
-import { Experiment, Variant } from 'react-optimize';
+import { getAppNames, registerApplication, start, triggerAppChange, unregisterApplication } from 'single-spa';
+var intervalId: NodeJS.Timer;
 
-const layoutEl = document.querySelector('#layout');
-layoutEl.innerHTML = `
-<Experiment id="TPunGV65RDK9YP29npw4ow">
-  <Variant id="0">Original</Variant>
-  <Variant id="1">
-    <div>CEP INPUT</div>
-  </Variant>
-</Experiment>
-`;
+async function optimizeHandler(){
+ try {
+ 
+  intervalId = setInterval(async () => {
+    if ((window as any ).dataLayer ) {
+      await (window as any ).dataLayer.push({ event: "optimize.activate" });
+    }
+
+    if ((window as any ).google_optimize !== undefined) {
+      const variant = (window as any ).google_optimize.get('TPunGV65RDK9YP29npw4ow');
+      localStorage.setItem('layout:variant',variant);
+      
+      clearInterval(intervalId); 
+      spaHandler(variant);
+     
+    }
+  }, 100);
+} catch (error) {
+  console.log('Error', error);
+} finally {
+
+}
+}
 
 async function spaHandler(
-  detail: { show: boolean },
+ variant:any,
   fromLocalStorage: boolean = false
 ) {
   try {
-    const show = detail.show;
-
-    if (show) {
+    if(variant=="1"){
+      console.log("Layout Novo");
       registerApplication(
-        'app1',
-        () => import('../../main/pottencial-broker-app'),
-        (location) => location.pathname === '/portal'
-      );
-    } else {
-      registerApplication(
-        'app2',
-        () => import('../../main_legado'),
-        (location) => location.pathname === '/portal'
-      );
+        {
+          name: 'app1',
+          app: () => import('../../main/pottencial-broker-app'),
+          activeWhen:'/portal',
+        });
+    }
+    else
+    {
+      console.log("Layout legado");
+      registerApplication({
+        name: 'app2',
+        app: () => import('../../main_legado'),
+        activeWhen:'/portal',
+      });      
     }
   } catch (error) {
     console.log('Error', error);
@@ -48,13 +65,13 @@ registerApplication({
 window.addEventListener('refresh', (event: CustomEvent) => {
   console.log('Event', event);
   localStorage.setItem('DETAILS', JSON.stringify(event.detail));
-  spaHandler(event.detail);
+  optimizeHandler();
 });
 
-if (localStorage.getItem('DETAILS')) {
-  const details = localStorage.getItem('DETAILS');
-  spaHandler(JSON.parse(details), true);
-}
+ if (localStorage.getItem('layout:variant')) {
+   const variant = localStorage.getItem('layout:variant');
+   spaHandler(variant, true);
+ }
 
 start({
   urlRerouteOnly: true,

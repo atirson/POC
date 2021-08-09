@@ -10,6 +10,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self' https: localhost:*; script-src 'unsafe-inline' 'unsafe-eval' https: localhost:*; connect-src https: localhost:* ws://localhost:*; style-src 'unsafe-inline' https:; object-src 'none';"
     />
+    
     <meta name="importmap-type" content="systemjs-importmap" />
     <script type="systemjs-importmap">
       {
@@ -19,6 +20,23 @@
           "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
         }
       }
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-204229064-1');
+    </script>
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MWWK5TV"></script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-204229064-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      gtag = function () { dataLayer.push(arguments); }
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-204229064-1', { 'optimize_id': 'TPunGV65RDK9YP29npw4ow'});
     </script>
     <link
       rel="preload"
@@ -49,31 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/extras/amd.min.js"></script>
     <% } %>
 
-    <div id="layout" style="height: 10rem; background-color: lightblue">
-    </div>
   </head>
-
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-204229064-1"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){​​​dataLayer.push(arguments);}​​​
-    gtag('js', newDate());
-    gtag('config', 'UA-204229064-1');
-  </script>
-  <script src="https://www.googleoptimize.com/optimize.js?id=OPT-MWWK5TV"></script>
-  <script
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=UA-204229064-1"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    gtag = function () {​​​ dataLayer.push(arguments); }​​​
-    gtag('js', newDate());
-    gtag('config', 'UA-204229064-1', {​​​ 'optimize_id':'TPunGV65RDK9YP29npw4ow'}​​​);
-  </script>
 
   <body>
     <noscript> You need to enable JavaScript to run this app. </noscript>

@@ -9,9 +9,10 @@ export default function Root(props) {
       `https://610ab78e52d56400176aff4c.mockapi.io/login/${values.email}`
     );
     if (res.status === 200) {
+      console.log('Success:', values);    
+      sessionStorage.setItem('version', res.data.id);
       const event = new CustomEvent('refresh', { detail: { ...res.data } });
       window.dispatchEvent(event);
-      console.log('Success:', values);
     }
   };
 
