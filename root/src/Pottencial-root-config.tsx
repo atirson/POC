@@ -1,59 +1,84 @@
-import { getAppNames, registerApplication, start, triggerAppChange, unregisterApplication } from 'single-spa';
+import {
+  getAppStatus,
+  registerApplication,
+  start,
+  unregisterApplication,
+} from 'single-spa';
 var intervalId: NodeJS.Timer;
 
-async function optimizeHandler(){
- try {
- 
-  intervalId = setInterval(async () => {
-    if ((window as any ).dataLayer ) {
-      await (window as any ).dataLayer.push({ event: "optimize.activate" });
-    }
-
-    if ((window as any ).google_optimize !== undefined) {
-      const variant = (window as any ).google_optimize.get('TPunGV65RDK9YP29npw4ow');
-      localStorage.setItem('layout:variant',variant);
-      
-      clearInterval(intervalId); 
-      spaHandler(variant);
-     
-    }
-  }, 100);
-} catch (error) {
-  console.log('Error', error);
-} finally {
-
-}
-}
-
-async function spaHandler(
- variant:any,
-  fromLocalStorage: boolean = false
-) {
+async function optimizeHandler(isLogin: boolean = false) {
   try {
-    if(variant=="1"){
-      console.log("Layout Novo");
-      registerApplication(
-        {
-          name: 'app1',
-          app: () => import('../../main/pottencial-broker-app'),
-          activeWhen:'/portal',
+    intervalId = setInterval(async () => {
+      if ((window as any).dataLayer) {
+        await (window as any).dataLayer.push({ event: 'optimize.activate' });
+      }
+
+      if ((window as any).google_optimize !== undefined) {
+        const variant = (window as any).google_optimize.get(
+          'TPunGV65RDK9YP29npw4ow'
+        );
+        localStorage.setItem('layout:variant', variant);
+
+        clearInterval(intervalId);
+        spaHandler(variant, isLogin);
+      }
+    }, 100);
+  } catch (error) {
+    console.log('Error', error);
+  } finally {
+  }
+}
+
+async function spaHandler(variant: any, isLogin: boolean = false) {
+  try {
+    if (variant == '1') {
+      console.log('---------------Layout Novo--------------');
+      const status = getAppStatus('legacy');
+      console.log('Status legacy', status);
+      if (status) {
+        unregisterApplication('legacy').then(() => {
+          registerNewInterfaceApplication();
         });
-    }
-    else
-    {
-      console.log("Layout legado");
-      registerApplication({
-        name: 'app2',
-        app: () => import('../../main_legado'),
-        activeWhen:'/portal',
-      });      
+      } else {
+        registerNewInterfaceApplication();
+      }
+    } else {
+      console.log('---------Layout legado------------');
+      const status = getAppStatus('newInterface');
+      console.log('Status newInterface', status);
+      if (status) {
+        unregisterApplication('newInterface').then(() => {
+          registerLegacyApplication();
+        });
+      } else {
+        registerLegacyApplication();
+      }
     }
   } catch (error) {
     console.log('Error', error);
   } finally {
     start();
-    if (!fromLocalStorage) window.location.pathname = '/portal';
+    console.log('is login', isLogin);
+    if (isLogin) {
+      window.location.pathname = '/portal';
+    }
   }
+}
+
+function registerLegacyApplication() {
+  registerApplication({
+    name: 'legacy',
+    app: () => import('../../main_legado'),
+    activeWhen: '/portal',
+  });
+}
+
+function registerNewInterfaceApplication() {
+  registerApplication({
+    name: 'newInterface',
+    app: () => import('../../main/pottencial-broker-app'),
+    activeWhen: '/portal',
+  });
 }
 
 registerApplication({
@@ -64,14 +89,19 @@ registerApplication({
 
 window.addEventListener('refresh', (event: CustomEvent) => {
   console.log('Event', event);
-  localStorage.setItem('DETAILS', JSON.stringify(event.detail));
-  optimizeHandler();
+  localStorage.setItem('DETAILS', JSON.stringify(event.detail.data));
+  optimizeHandler(event.detail.isLogin);
 });
 
- if (localStorage.getItem('layout:variant')) {
-   const variant = localStorage.getItem('layout:variant');
-   spaHandler(variant, true);
- }
+window.addEventListener('testEvent', (event: CustomEvent) => {
+  console.log('Event', event);
+  spaHandler(event.detail.variant);
+});
+
+if (localStorage.getItem('layout:variant')) {
+  const variant = localStorage.getItem('layout:variant');
+  spaHandler(variant);
+}
 
 start({
   urlRerouteOnly: true,

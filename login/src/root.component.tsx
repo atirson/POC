@@ -11,7 +11,7 @@ export default function Root(props) {
     if (res.status === 200) {
       console.log('Success:', values);    
       sessionStorage.setItem('version', res.data.id);
-      const event = new CustomEvent('refresh', { detail: { ...res.data } });
+      const event = new CustomEvent('refresh', { detail: { data: res.data, isLogin: true } });
       window.dispatchEvent(event);
     }
   };
